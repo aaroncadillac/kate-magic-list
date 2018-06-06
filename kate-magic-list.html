@@ -36,37 +36,5 @@
     <kate-magic-list-item label-input="Add item" on-add-item="addItem" add-item></kate-magic-list-item>
   </template>
 
-  <script>
-    class KateMagicList extends Polymer.Element {
-      static get is() { return 'kate-magic-list'; }
-      static get properties() {
-        return {
-          dataList: {
-            type: Array,
-            value: () => ([]),
-            notify: true
-          },
-          emptyListMessage: {
-            type: String,
-            value: 'The list is empty'
-          },
-          _emptyList: {
-            type: Boolean,
-            computed: '_getListLength(dataList.length)'
-          }
-        }
-      }
-      _getListLength(size) {
-        return !!size
-      }
-      removeItem(data) {
-        this.splice('dataList', data.detail, 1);
-      }
-      addItem(data) {
-        this.push('dataList', data.detail)
-      }
-    }
-
-    window.customElements.define(KateMagicList.is, KateMagicList);
-  </script>
+  <script src="kate-magic-list.js"> </script>
 </dom-module>

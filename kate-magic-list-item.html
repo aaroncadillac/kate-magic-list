@@ -11,7 +11,7 @@
 
 <dom-module id="kate-magic-list-item">
   <template>
-    <style include="shared-styles">
+    <style>
       :host {
         display: block;
         width: 100%;
@@ -49,7 +49,7 @@
           dataItem: {
             type: Object,
             value: () => ({
-              value: null
+              value: ''
             }),
             notify: true
           },
@@ -73,9 +73,9 @@
       }
       _actionAdd(event) {
         let preValue = this.dataItem.value
-        if(preValue != null) {
+        if(preValue.length)) {
           this.dispatchEvent(new CustomEvent('add-item', { detail: this.dataItem} ));
-          this.set('dataItem', {value: null})
+          this.set('dataItem', {value: ''});
         }
       }
       _actionRemove(event) {
