@@ -1,0 +1,72 @@
+<!-- 
+  Kate Components
+  Created by aaroncadillac
+  aaron.hmaya@gmail.com 
+-->
+
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="kate-magic-list-item.html">
+
+<dom-module id="kate-magic-list">
+  <template>
+    <style>
+      :host {
+        display: block;  
+        width: 100%;    
+      }
+      ul {
+        list-style:none;
+      }
+      .empty-list {
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+        display: block;
+      }
+    </style>
+    
+    <span class="empty-list" hidden$="[[_emptyList]]">[[emptyListMessage]]</span>
+    <ul>
+      <template is="dom-repeat" items="{{dataList}}">
+      <li>
+        <kate-magic-list-item data-item="{{item}}" item-index="[[index]]" on-remove-item="removeItem" remove-item></kate-magic-list-item>
+      </li>
+      </template>
+    </ul>
+    <kate-magic-list-item label-input="Add item" on-add-item="addItem" add-item></kate-magic-list-item>
+  </template>
+
+  <script>
+    class KateMagicList extends Polymer.Element {
+      static get is() { return 'kate-magic-list'; }
+      static get properties() {
+        return {
+          dataList: {
+            type: Array,
+            value: () => ([]),
+            notify: true
+          },
+          emptyListMessage: {
+            type: String,
+            value: 'The list is empty'
+          },
+          _emptyList: {
+            type: Boolean,
+            computed: '_getListLength(dataList.length)'
+          }
+        }
+      }
+      _getListLength(size) {
+        return !!size
+      }
+      removeItem(data) {
+        this.splice('dataList', data.detail, 1);
+      }
+      addItem(data) {
+        this.push('dataList', data.detail)
+      }
+    }
+
+    window.customElements.define(KateMagicList.is, KateMagicList);
+  </script>
+</dom-module>

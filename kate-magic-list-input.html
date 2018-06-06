@@ -1,0 +1,40 @@
+<!-- 
+  Kate Components
+  Created by aaroncadillac
+  aaron.hmaya@gmail.com 
+-->
+
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-input/paper-input.html">
+
+<dom-module id="kate-magic-list-input">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <paper-input label="[[label]]" value="{{inputValue}}"></paper-input>
+  </template>
+
+  <script>
+    class KateMagicListInput extends Polymer.Element {
+      static get is() { return 'kate-magic-list-input'; }
+      static get properties() {
+        return {
+          inputValue: {
+            type: String,
+            value: '',
+            notify: true
+          },
+          label: {
+            type: String,
+            value: ''
+          }
+        }
+      }
+    }
+
+    window.customElements.define(KateMagicListInput.is, KateMagicListInput);
+  </script>
+</dom-module>

@@ -1,0 +1,88 @@
+<!-- 
+  Kate Components
+  Created by aaroncadillac
+  aaron.hmaya@gmail.com 
+-->
+
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="kate-magic-list-input.html">
+
+<dom-module id="kate-magic-list-item">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        width: 100%;
+        padding: 5px 10px;
+      }
+      .button-zone, .input-zone {
+        display: inline-block;
+        box-sizing: border-box;
+      }
+      .button-zone {
+        width: 40px;
+      }
+      .input-zone {
+        width: calc(100% - 50px);
+      }
+    </style>
+    <div class="input-zone">
+      <kate-magic-list-input label="[[labelInput]]" input-value="{{dataItem.value}}"></kate-magic-list-input>
+    </div>
+    <div class="button-zone">
+      <template is="dom-if" if="[[removeItem]]">
+        <paper-icon-button icon="delete" on-click="_actionRemove"></paper-icon-button>
+      </template>
+      <template is="dom-if" if="[[addItem]]">
+        <paper-icon-button icon="add" on-click="_actionAdd"></paper-icon-button>
+      </template>
+    </div>
+  </template>
+
+  <script>
+    class KateMagicListItem extends Polymer.Element {
+      static get is() { return 'kate-magic-list-item'; }
+      static get properties() {
+        return {
+          dataItem: {
+            type: Object,
+            value: () => ({
+              value: null
+            }),
+            notify: true
+          },
+          itemIndex: {
+            type: Number,
+            value: -1
+          },
+          addItem: {
+            type: Boolean,
+            value: false
+          },
+          removeItem: {
+            type: Boolean,
+            value: false
+          },
+          labelInput: {
+            type: String,
+            value: ''
+          }
+        }
+      }
+      _actionAdd(event) {
+        let preValue = this.dataItem.value
+        if(preValue != null) {
+          this.dispatchEvent(new CustomEvent('add-item', { detail: this.dataItem} ));
+          this.set('dataItem', {value: null})
+        }
+      }
+      _actionRemove(event) {
+        this.dispatchEvent(new CustomEvent('remove-item', { detail: this.itemIndex } ));
+      }
+    }
+
+    window.customElements.define(KateMagicListItem.is, KateMagicListItem);
+  </script>
+</dom-module>
