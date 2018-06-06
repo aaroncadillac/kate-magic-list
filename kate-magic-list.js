@@ -1,4 +1,5 @@
-/**
+(function KateMagicListDefinition(customElement) {
+  /**
  * `kate-magic-list`
  * A mutable list that provides the ability to interactively modify an array of objects 
  *
@@ -62,4 +63,5 @@ class KateMagicList extends Polymer.Element {
   }
 }
 
-window.customElements.define(KateMagicList.is, KateMagicList);
+customElement.define(KateMagicList.is, KateMagicList);
+})(window.customElements)

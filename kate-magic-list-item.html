@@ -72,8 +72,8 @@
         }
       }
       _actionAdd(event) {
-        let preValue = this.dataItem.value
-        if(preValue.length)) {
+        let preValue = this.dataItem.value;
+        if(preValue.length) {
           this.dispatchEvent(new CustomEvent('add-item', { detail: this.dataItem} ));
           this.set('dataItem', {value: ''});
         }
