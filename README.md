@@ -1,6 +1,8 @@
 # Kate Magic List
 A mutable list that provides the ability to interactively modify an array of objects based on Material Design
 
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/aaroncadillac/kate-magic-list)
+
 ## Instalation
 ```
   bower i --save kate-magic-list
