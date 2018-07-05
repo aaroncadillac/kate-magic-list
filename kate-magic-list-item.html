@@ -29,7 +29,7 @@
       }
     </style>
     <div class="input-zone">
-      <kate-magic-list-input label="[[labelInput]]" input-value="{{dataItem.value}}"></kate-magic-list-input>
+      <kate-magic-list-input label="[[labelInput]]" input-value="{{dataItem.value}}" on-keydown="_addWithEnterKey"></kate-magic-list-input>
     </div>
     <div class="button-zone">
       <template is="dom-if" if="[[removeItem]]">
@@ -81,6 +81,11 @@
       _actionRemove(event) {
         this.dispatchEvent(new CustomEvent('remove-item', { detail: this.itemIndex } ));
       }
+      _addWithEnterKey(event) {
+        if(event.keyCode === 13 && this.addItem) {
+          this._actionAdd();
+        }
+      } 
     }
 
     window.customElements.define(KateMagicListItem.is, KateMagicListItem);
